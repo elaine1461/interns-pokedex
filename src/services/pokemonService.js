@@ -1,32 +1,5 @@
 import * as pokemonRepository from '../repositories/pokemonRepository.js';
 import { config } from '../config/index.js';
-
-/**
- * Format Pokemon name for display
- * "mr-mime" → "Mr Mime"
- */
-const formatName = (name) => {
-  return name
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-};
-
-/**
- * Format stat names for display
- */
-const formatStatName = (name) => {
-  const statNames = {
-    hp: 'HP',
-    attack: 'Attack',
-    defense: 'Defense',
-    'special-attack': 'Sp. Atk',
-    'special-defense': 'Sp. Def',
-    speed: 'Speed'
-  };
-  return statNames[name] || formatName(name);
-};
-
 /**
  * Format Pokemon name for display
  * "mr-mime" → "Mr Mime"
@@ -148,6 +121,7 @@ export const getAllPokemon = async (page = 1, limit = config.pagination.defaultL
     hasPrevPage: page > 1
   };
 };
+
 export const searchPokemon = async (query) => {
   // Handle empty query
   if (!query || query.trim().length === 0) {
@@ -179,6 +153,7 @@ export const searchPokemon = async (query) => {
     totalCount: searchResults.count
   };
 };
+
 export const getPokemonTypes = async () => {
   const types = await pokemonRepository.getPokemonTypes();
 
